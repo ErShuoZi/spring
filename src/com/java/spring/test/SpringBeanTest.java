@@ -1,6 +1,8 @@
 package com.java.spring.test;
 
+import com.java.spring.bean.Master;
 import com.java.spring.bean.Monster;
+import com.java.spring.service.MemberServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -42,6 +44,53 @@ public class SpringBeanTest {
         //看到类的加载路径
         System.out.println(file);  ///Users/ershuozi/Desktop/java/spring/out/production/spring
     }
+
+    //通过ref来设置bean属性
+    @Test
+    public void setBeanByRef() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        MemberServiceImpl memberService = ioc.getBean("memberService", MemberServiceImpl.class);
+        memberService.add();   //MemberServiceImpl add方法被调用   memberDAoimpl add() 方法
+
+    }
+
+    @Test
+    public void setBeanByInner() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        MemberServiceImpl memberService = ioc.getBean("memberService2", MemberServiceImpl.class);
+        memberService.add();   //MemberServiceImpl add方法被调用   memberDAoimpl add() 方法
+
+    }
+
+    @Test
+    public void setBeanByConstructor() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster bean = ioc.getBean(Monster.class);
+        System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
+    }
+
+
+    //通过p名称空间设置属性
+    @Test
+    public void setBeanByPname() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster bean = ioc.getBean("monster04",Monster.class);
+        System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
+    }
+
+    //给集合或者数组属性进行配置赋值
+    //1.List
+    @Test
+    public void setBeanByCollection() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Master master = ioc.getBean("master01", Master.class);
+        System.out.println("masterBean=" + master);
+    }
+
+
+
+
+
 
 
 }

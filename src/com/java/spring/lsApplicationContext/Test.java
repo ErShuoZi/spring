@@ -1,6 +1,8 @@
 package com.java.spring.lsApplicationContext;
 
 import com.java.spring.bean.Monster;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 /**
  * @author liushuo
@@ -8,7 +10,6 @@ import com.java.spring.bean.Monster;
  */
 public class Test {
     public static void main(String[] args) {
-
         try {
             LsApplicationContext ioc = new LsApplicationContext("beans.xml");
             Monster bean = (Monster) ioc.getBean("monster01");
@@ -21,4 +22,6 @@ public class Test {
             throw new RuntimeException(e);
         }
     }
+
+
 }
