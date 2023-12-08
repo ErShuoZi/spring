@@ -5,6 +5,10 @@ import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.File;
+import java.util.Arrays;
+import java.util.concurrent.ConcurrentHashMap;
+
 /**
  * @author liushuo
  * @version 1.0
@@ -25,5 +29,19 @@ public class SpringBeanTest {
         //5.也可以在获取的时候指定类型
         Monster monster011 = ioc.getBean("monster01", Monster.class);
         System.out.println(monster011);
+
+        //查看容器注入了哪些bean对象,会输出bean的id
+        String[] beanDefinitionNames = ioc.getBeanDefinitionNames();
+        System.out.println(Arrays.toString(beanDefinitionNames) + "------");
     }
+
+    //验证类加载路径
+    @Test
+    public void classPath() {
+        File file = new File(this.getClass().getResource("/").getPath());
+        //看到类的加载路径
+        System.out.println(file);  ///Users/ershuozi/Desktop/java/spring/out/production/spring
+    }
+
+
 }
