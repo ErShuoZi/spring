@@ -1,5 +1,6 @@
 package com.java.spring.test;
 
+import com.java.spring.bean.BookStore;
 import com.java.spring.bean.Master;
 import com.java.spring.bean.Monster;
 import com.java.spring.service.MemberServiceImpl;
@@ -71,12 +72,12 @@ public class SpringBeanTest {
 
 
     //通过p名称空间设置属性
-    @Test
-    public void setBeanByPname() {
-        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
-        Monster bean = ioc.getBean("monster04",Monster.class);
-        System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
-    }
+//    @Test
+//    public void setBeanByPname() {
+//        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+//        Monster bean = ioc.getBean("monster04",Monster.class);
+//        System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
+//    }
 
     //给集合或者数组属性进行配置赋值
     //1.List
@@ -85,6 +86,15 @@ public class SpringBeanTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         Master master = ioc.getBean("master01", Master.class);
         System.out.println("masterBean=" + master);
+    }
+
+
+    //使用util:list名称空间给属性赋值
+    @Test
+    public void setBeanByUtilList() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        BookStore bookStore = ioc.getBean("bookStore", BookStore.class);
+        System.out.println("bookStoreBean=" + bookStore);
     }
 
 
