@@ -194,4 +194,31 @@
         <property name="keyVal" value="monster_02"></property>
     </bean>
 
+    <bean id="monster10" class="com.java.spring.bean.Monster">
+        <property name="monsterId" value="10"></property>
+        <property name="name" value="蜘蛛精"></property>
+        <property name="skill" value="织网"></property>
+    </bean>
+
+
+<!--        这个对象的属性值和Id 等于 monster10 的一致-->
+<!--    parent="monster10": 指定当前配置的对象的属性值从id=monster10的对象继承-->
+    <bean id="monster11" class="com.java.spring.bean.Monster" parent="monster10">
+
+    </bean>
+
+<!--    专门供别人继承bean,不能被实例化-->
+    <bean id="monster12" class="com.java.spring.bean.Monster" abstract="true">
+        <property name="monsterId" value="10"></property>
+        <property name="name" value="蜘蛛精"></property>
+        <property name="skill" value="织网"></property>
+    </bean>
+
+
+<!--        //配置House对象,演示bean声明周期-->
+<!--    指定init方法和destroy方法-->
+
+    <bean id="house" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
+        <property name="name" value="大豪宅"></property>
+    </bean>
 </beans>

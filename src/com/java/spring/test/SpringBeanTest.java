@@ -113,7 +113,6 @@ public class SpringBeanTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         Monster myMonster02 = ioc.getBean("my_monster01", Monster.class);
         System.out.println(myMonster02);
-
     }
 
 
@@ -123,7 +122,6 @@ public class SpringBeanTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         Monster myMonster02 = ioc.getBean("my_monster02", Monster.class);
         System.out.println(myMonster02);
-
     }
 
 
@@ -133,10 +131,29 @@ public class SpringBeanTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         Monster myMonster03 = ioc.getBean("my_monster03", Monster.class);
         System.out.println(myMonster03);
-
+    }
+    //继承bean
+    @Test
+    public void setBeanByExtends() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster myMonster11 = ioc.getBean("monster11", Monster.class);
+        System.out.println(myMonster11);
     }
 
 
+    @Test
+    public void setBeanByLife() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        House house = ioc.getBean("house", House.class);
+        System.out.println(house);
+        ioc.close();
+        /**
+         * House的无参构造器
+         * House SetName()
+         * House init()
+         * House destory()
+         */
+    }
 
 
 
