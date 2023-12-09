@@ -2,6 +2,7 @@ package com.java.spring.test;
 
 import com.java.spring.bean.*;
 import com.java.spring.service.MemberServiceImpl;
+import com.java.spring.web.OrderServlet;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -184,6 +185,17 @@ public class SpringBeanTest {
         ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         Monster monster1000 = ioc.getBean("monster1000", Monster.class);
         System.out.println(monster1000);
+    }
+
+    //测试自动装配
+    @Test
+    public void setBeanByAutowire() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans02.xml");
+        OrderServlet orderServlet = ioc.getBean("orderServlet", OrderServlet.class);
+        //验证是否自动装配上orderService
+        System.out.println(orderServlet.getOrderService()); //com.java.spring.service.OrderService@7ec7ffd3
+        //验证是否自动装配上orderDao
+        System.out.println(orderServlet.getOrderService().getOrderDao()); //com.java.spring.dao.OrderDao@1fa268de
     }
 
 }

@@ -5,16 +5,52 @@
 
 
     <bean id="house" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
-        <property name="name" value="大豪宅"></property>
+        <property name="name" value="大豪宅" />
     </bean>
 
     <bean id="house02" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
-        <property name="name" value="香港豪宅"></property>
+        <property name="name" value="香港豪宅" />
     </bean>
 
 <!--    配置后置处理器-->
 <!--当在beans02.xml容器配置文件中配置了后置处理器后,这时该后置处理器会对在该容器文件中的所有对象生效-->
-    <bean id="myHousePostProcessor" class="com.java.spring.bean.MyBeanPostProcessor"></bean>
+    <bean id="myHousePostProcessor" class="com.java.spring.bean.MyBeanPostProcessor" />
+
+
+<!--    配置OrderDao-->
+    <bean class="com.java.spring.dao.OrderDao" id="orderDao" />
+<!--    <bean class="com.java.spring.dao.OrderDao" id="orderDao2" />-->
+
+
+
+    <!--    配置OrderService-->
+<!--    自动装配方式 autowire="byType / byName"
+           1.byType:表示在创建OrderService对象时,通过类型来个给对象的属性自动完成赋值/引用
+            对象中包括private OrderDao orderDao;属性,就会在容器中查找是否存在OrderDao类型的对象
+            如果存在,就会自动的装配,如果是按照Type去查找,则容器中不能够存在两个OrderDao类型的对象
+            Could not autowire. There is more than one bean of 'OrderDao' type. Beans: orderDao2,orderDao. Properties: 'orderDao
+           2.byName:表示通过名字完成自动装配
+               <bean class="com.java.spring.service.OrderService" id="orderService" autowire="byName">
+               Spring容器创建好对象
+               1.先看orderService中的属性  private OrderDao orderDao;
+               2.再根据这个属性的setXXX()方法的xxx来找对象id
+               3. public void setOrderDao(OrderDao orderDao)就会找id = orderDao的对象,来进行自动转配
+
+-->
+    <bean class="com.java.spring.service.OrderService" id="orderService" autowire="byName">
+<!--        传统方式-->
+<!--        <property name="orderDao" ref="orderDao"></property>-->
+
+
+
+    </bean>
+
+    <!--    配置OrderServlet-->
+    <bean class="com.java.spring.web.OrderServlet" id="orderServlet" autowire="byName" />
+
+
+
+
 
 
 </beans>
