@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+    <bean id="house" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
+        <property name="name" value="大豪宅"></property>
+    </bean>
+
+    <bean id="house02" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
+        <property name="name" value="香港豪宅"></property>
+    </bean>
+
+<!--    配置后置处理器-->
+<!--当在beans02.xml容器配置文件中配置了后置处理器后,这时该后置处理器会对在该容器文件中的所有对象生效-->
+    <bean id="myHousePostProcessor" class="com.java.spring.bean.MyBeanPostProcessor"></bean>
+
+
+</beans>

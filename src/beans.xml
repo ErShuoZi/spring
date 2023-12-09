@@ -218,7 +218,9 @@
 <!--        //配置House对象,演示bean声明周期-->
 <!--    指定init方法和destroy方法-->
 
+
     <bean id="house" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
         <property name="name" value="大豪宅"></property>
     </bean>
+
 </beans>

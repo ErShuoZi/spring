@@ -156,6 +156,25 @@ public class SpringBeanTest {
     }
 
 
+    //演示后置处理器
+    @Test
+    public void setBeanByPostProcessor() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans02.xml");
+        House house = ioc.getBean("house", House.class);
+        House house02 = ioc.getBean("house02", House.class);
+        System.out.println(house);
+        System.out.println(house02);
+        ioc.close();
 
+        /**
+         * House的无参构造器
+         * House SetName()
+         * postProcessBeforeInitialization() bean=com.java.spring.bean.House@44ebcd03beanName=house
+         * House init()
+         * postProcessAfterInitialization() bean=com.java.spring.bean.House@44ebcd03beanName=house
+         * com.java.spring.bean.House@44ebcd03
+         * House destory()
+         */
+    }
 
 }
