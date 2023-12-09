@@ -170,4 +170,10 @@
         <property name="dept.name" value="java开发"/>
 
     </bean>
+
+
+<!--    配置Monster对象,通过静态工厂获取-->
+    <bean id="my_monster01" class="com.java.spring.factory.MyStaticFactory" factory-method="getMonster">
+        <constructor-arg value="monster02"></constructor-arg>
+    </bean>
 </beans>

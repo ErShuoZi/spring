@@ -107,6 +107,15 @@ public class SpringBeanTest {
         System.out.println("emp'department=" +emp.getDept().getName());
     }
 
+    //通过静态工厂获取bean
+    @Test
+    public void setBeanByStaticFactory() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster myMonster02 = ioc.getBean("my_monster01", Monster.class);
+        System.out.println(myMonster02);
+
+    }
+
 
 
 
