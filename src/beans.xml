@@ -2,19 +2,23 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
        xmlns:util="http://www.springframework.org/schema/util"
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:context="http://www.springframework.org/schema/context"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 
     http://www.springframework.org/schema/util
-    http://www.springframework.org/schema/util/spring-util.xsd"
+    http://www.springframework.org/schema/util/spring-util.xsd
+    http://www.springframework.org/schema/context
+    http://www.springframework.org/schema/context/spring-context.xsd"
 
 >
-        <!--
-        配置Monster-->
+    <!--
+    配置Monster-->
 
     <util:list id="myBookList">
         <value>水浒传</value>
         <value>三国</value>
     </util:list>
+
     <bean class="com.java.spring.bean.Monster" id="monster01" >
         <property name="monsterId" value="100" />
         <property name="name" value="牛魔王" />
@@ -40,7 +44,7 @@
 
 
 
-<!--通过p名称空间来配置bean-->
+    <!--通过p名称空间来配置bean-->
     <bean id="monster04" class="com.java.spring.bean.Monster"
           p:monsterId="500"
           p:name="红孩儿"
@@ -48,12 +52,12 @@
     />
 
 
-<!--   配置MemberServiceImp-->
+    <!--   配置MemberServiceImp-->
 
-<!--    ref="memberDAO"表示 MemberServiceImpl对象属性 memberDAO 引用的对象是 id 等于 memberDAO 的对象
-        这里体现出Spring的依赖注入
-        在Spring容器中,它是作为一个整体来执行,如果引用到一个bean对象,对配置的顺序没有要求
-        -->
+    <!--    ref="memberDAO"表示 MemberServiceImpl对象属性 memberDAO 引用的对象是 id 等于 memberDAO 的对象
+            这里体现出Spring的依赖注入
+            在Spring容器中,它是作为一个整体来执行,如果引用到一个bean对象,对配置的顺序没有要求
+            -->
     <bean id="memberService"  class="com.java.spring.service.MemberServiceImpl">
         <property name="memberDAO" ref="memberDAO"/>
     </bean>
@@ -62,39 +66,39 @@
     <bean id="memberDAO" class="com.java.spring.dao.MemberDAOImpl"/>
 
 
-<!--    配置MemberServiceImpl对象-使用内部bean方式-->
+    <!--    配置MemberServiceImpl对象-使用内部bean方式-->
     <bean class="com.java.spring.service.MemberServiceImpl" id="memberService2">
-<!--        自己配置一个内部bean-->
+        <!--        自己配置一个内部bean-->
         <property name="memberDAO" >
-        <bean class="com.java.spring.dao.MemberDAOImpl" />
+            <bean class="com.java.spring.dao.MemberDAOImpl" />
         </property>
     </bean>
 
 
 
 
-<!--    配置Master对象-->
+    <!--    配置Master对象-->
     <bean class="com.java.spring.bean.Master" id="master01">
         <property name="name" value="太上老君" />
-<!--        List-->
+        <!--        List-->
         <property name="monsterList">
             <list>
                 <ref bean="monster01"/>
                 <ref bean="monster02"/>
-<!--                内部bean-->
+                <!--                内部bean-->
                 <bean class="com.java.spring.bean.Monster">
-                <property name="name" value="老鼠精"/>
+                    <property name="name" value="老鼠精"/>
                     <property name="monsterId" value="300"/>
                     <property name="skill" value="挖洞"/>
                 </bean>
             </list>
         </property>
 
-<!--        Map-->
+        <!--        Map-->
         <property name="monsterMap" >
             <map>
-<!--             <entry key="monster001" value-ref="monster03" />-->
-<!--             <entry key="monster002" value-ref="monster03" />-->
+                <!--             <entry key="monster001" value-ref="monster03" />-->
+                <!--             <entry key="monster002" value-ref="monster03" />-->
 
                 <entry>
                     <key>
@@ -111,7 +115,7 @@
             </map>
         </property>
 
-<!--        Set-->
+        <!--        Set-->
         <property name="monsterSet" >
             <set>
                 <ref bean="monster02"/>
@@ -124,7 +128,7 @@
             </set>
         </property>
 
-<!--        Array-->
+        <!--        Array-->
         <property name="monsterName">
             <array>
                 <value>小妖怪</value>
@@ -135,92 +139,115 @@
     </bean>
 
 
-<!--    配置BookStore-->
+    <!--    配置BookStore-->
 
-<!--    定义util:List-->
-<!--    <util:list id="myBookList">-->
-<!--            <value>三国演义</value>-->
-<!--            <value>红楼梦</value>-->
-<!--            <value>西游记</value>-->
-<!--            <value>水浒传</value>-->
-<!--    </util:list>-->
-<!--    <bean class="com.java.spring.bean.BookStore" id="bookStore">-->
-<!--        <property name="bookList" ref="myBookList">-->
+    <!--    定义util:List-->
+    <!--    <util:list id="myBookList">-->
+    <!--            <value>三国演义</value>-->
+    <!--            <value>红楼梦</value>-->
+    <!--            <value>西游记</value>-->
+    <!--            <value>水浒传</value>-->
+    <!--    </util:list>-->
+    <!--    <bean class="com.java.spring.bean.BookStore" id="bookStore">-->
+    <!--        <property name="bookList" ref="myBookList">-->
 
-<!--        </property>-->
-<!--    </bean>-->
+    <!--        </property>-->
+    <!--    </bean>-->
 
-        <bean class="com.java.spring.bean.BookStore" id="bookStore">
-            <property name="bookList" ref="myBookList" >
-<!--                <list>-->
-<!--                    <value>哈哈</value>-->
-<!--                    <value>拉拉</value>-->
-<!--                </list>-->
-            </property>
-        </bean>
+    <bean class="com.java.spring.bean.BookStore" id="bookStore">
+        <property name="bookList" ref="myBookList" >
+            <!--                <list>-->
+            <!--                    <value>哈哈</value>-->
+            <!--                    <value>拉拉</value>-->
+            <!--                </list>-->
+        </property>
+    </bean>
 
 
-<!--    配置Dept对象-->
-    <bean class="com.java.spring.bean.Dept" id="dept"></bean>
-<!--    配置Emp对象-->
+    <!--    配置Dept对象-->
+    <bean class="com.java.spring.bean.Dept" id="dept" />
+    <!--    配置Emp对象-->
     <bean class="com.java.spring.bean.Emp" id="emp">
         <property name="name" value="jack" />
         <property name="dept" ref="dept" />
-<!--        希望给dept的name属性赋值-->
+        <!--        希望给dept的name属性赋值-->
         <property name="dept.name" value="java开发"/>
 
     </bean>
 
 
-<!--    配置Monster对象,通过静态工厂获取-->
+    <!--    配置Monster对象,通过静态工厂获取-->
     <bean id="my_monster01" class="com.java.spring.factory.MyStaticFactory" factory-method="getMonster">
-        <constructor-arg value="monster02"></constructor-arg>
+        <constructor-arg value="monster02" />
     </bean>
 
 
     <!--    配置实例工厂对象-->
-    <bean class="com.java.spring.factory.MyInstanceFactory" id="myInstanceFactory"></bean>
+    <bean class="com.java.spring.factory.MyInstanceFactory" id="myInstanceFactory" />
 
     <!--    配置Monster对象,通过实例工厂获取-->
     <bean id="my_monster02" class="com.java.spring.factory.MyInstanceFactory" factory-bean="myInstanceFactory"  factory-method="getMonster">
-        <constructor-arg value="monster03"></constructor-arg>
+        <constructor-arg value="monster03" />
     </bean>
 
-<!--    配置Monster 通过FactoryBean
-        keyVal表示MyFactoryBean属性keyVal
-        value就是要获取对象对应的key
--->
+    <!--    配置Monster 通过FactoryBean
+            keyVal表示MyFactoryBean属性keyVal
+            value就是要获取对象对应的key
+    -->
     <bean id="my_monster03" class="com.java.spring.factory.MyFactoryBean">
-        <property name="keyVal" value="monster_02"></property>
+        <property name="keyVal" value="monster_02" />
     </bean>
 
     <bean id="monster10" class="com.java.spring.bean.Monster">
-        <property name="monsterId" value="10"></property>
-        <property name="name" value="蜘蛛精"></property>
-        <property name="skill" value="织网"></property>
+        <property name="monsterId" value="10" />
+        <property name="name" value="蜘蛛精" />
+        <property name="skill" value="织网" />
     </bean>
 
 
-<!--        这个对象的属性值和Id 等于 monster10 的一致-->
-<!--    parent="monster10": 指定当前配置的对象的属性值从id=monster10的对象继承-->
+    <!--        这个对象的属性值和Id 等于 monster10 的一致-->
+    <!--    parent="monster10": 指定当前配置的对象的属性值从id=monster10的对象继承-->
     <bean id="monster11" class="com.java.spring.bean.Monster" parent="monster10">
 
     </bean>
 
-<!--    专门供别人继承bean,不能被实例化-->
+    <!--    专门供别人继承bean,不能被实例化-->
     <bean id="monster12" class="com.java.spring.bean.Monster" abstract="true">
-        <property name="monsterId" value="10"></property>
-        <property name="name" value="蜘蛛精"></property>
-        <property name="skill" value="织网"></property>
+        <property name="monsterId" value="10" />
+        <property name="name" value="蜘蛛精" />
+        <property name="skill" value="织网" />
     </bean>
 
 
-<!--        //配置House对象,演示bean声明周期-->
-<!--    指定init方法和destroy方法-->
+    <!--        //配置House对象,演示bean声明周期-->
+    <!--    指定init方法和destroy方法-->
 
 
     <bean id="house" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
-        <property name="name" value="大豪宅"></property>
+        <property name="name" value="大豪宅" />
+    </bean>
+
+
+
+
+    <!--    配置Monster对象-->
+    <!--        指定属性文件位置-->
+<!--    属性文件如果有中文,需要将其转为Unicode编码-->
+    <context:property-placeholder location="classpath:my.properties" />
+    <bean class="com.java.spring.bean.Monster" id="monster1000">
+        <!--        传统方式-->
+        <!--        <property name="monsterId" value="1000"></property>-->
+        <!--        <property name="name" value="jack"></property>-->
+        <!--        <property name="skill" value="hello"></property>-->
+
+
+        <!--        改为从配置文件读取-->
+        <property name="monsterId"  value="${monsterId}"/>
+        <property name="name"  value="${name}"/>
+        <property name="skill"  value="${skill}"/>
+
+
+
     </bean>
 
 </beans>

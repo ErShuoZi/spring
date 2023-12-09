@@ -177,4 +177,13 @@ public class SpringBeanTest {
          */
     }
 
+
+    //使用属性文件配置bean
+    @Test
+    public void setBeanByPropertyFile() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster monster1000 = ioc.getBean("monster1000", Monster.class);
+        System.out.println(monster1000);
+    }
+
 }
