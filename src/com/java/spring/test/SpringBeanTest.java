@@ -127,6 +127,16 @@ public class SpringBeanTest {
     }
 
 
+    //通过FactoryBean获取bean
+    @Test
+    public void setBeanByFactoryBean() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Monster myMonster03 = ioc.getBean("my_monster03", Monster.class);
+        System.out.println(myMonster03);
+
+    }
+
+
 
 
 

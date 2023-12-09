@@ -186,4 +186,12 @@
         <constructor-arg value="monster03"></constructor-arg>
     </bean>
 
+<!--    配置Monster 通过FactoryBean
+        keyVal表示MyFactoryBean属性keyVal
+        value就是要获取对象对应的key
+-->
+    <bean id="my_monster03" class="com.java.spring.factory.MyFactoryBean">
+        <property name="keyVal" value="monster_02"></property>
+    </bean>
+
 </beans>
