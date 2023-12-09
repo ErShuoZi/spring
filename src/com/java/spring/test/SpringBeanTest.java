@@ -1,8 +1,6 @@
 package com.java.spring.test;
 
-import com.java.spring.bean.BookStore;
-import com.java.spring.bean.Master;
-import com.java.spring.bean.Monster;
+import com.java.spring.bean.*;
 import com.java.spring.service.MemberServiceImpl;
 import org.junit.jupiter.api.Test;
 import org.springframework.context.ApplicationContext;
@@ -66,7 +64,7 @@ public class SpringBeanTest {
     @Test
     public void setBeanByConstructor() {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
-        Monster bean = ioc.getBean(Monster.class);
+        Monster bean = ioc.getBean("monster02",Monster.class);
         System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
     }
 
@@ -95,6 +93,18 @@ public class SpringBeanTest {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         BookStore bookStore = ioc.getBean("bookStore", BookStore.class);
         System.out.println("bookStoreBean=" + bookStore);
+    }
+
+
+    //给属性进行级联赋值
+    @Test
+    public void setBeanByRelation() {
+        ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
+        Dept dept = ioc.getBean("dept", Dept.class);
+        System.out.println("deptBean=" + dept);
+        Emp emp = ioc.getBean("emp", Emp.class);
+        System.out.println("empBean=" + emp);
+        System.out.println("emp'department=" +emp.getDept().getName());
     }
 
 

@@ -156,7 +156,18 @@
 <!--                    <value>哈哈</value>-->
 <!--                    <value>拉拉</value>-->
 <!--                </list>-->
-
             </property>
         </bean>
+
+
+<!--    配置Dept对象-->
+    <bean class="com.java.spring.bean.Dept" id="dept"></bean>
+<!--    配置Emp对象-->
+    <bean class="com.java.spring.bean.Emp" id="emp">
+        <property name="name" value="jack" />
+        <property name="dept" ref="dept" />
+<!--        希望给dept的name属性赋值-->
+        <property name="dept.name" value="java开发"/>
+
+    </bean>
 </beans>
