@@ -17,14 +17,14 @@ import java.util.concurrent.ConcurrentHashMap;
  */
 public class SpringBeanTest {
     @Test
-   public void getMonster() {
+    public void getMonster() {
         //1.创建容器 ApplicationContext
         //2.该容器和容器配置文件关联
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
         //3.通过getBean获取对应对象
         //4.默认返回Object 但是它的运行类型是Monster
 //        Object monster01 = ioc.getBean("monster01");
-        Monster monster01 =  (Monster) ioc.getBean("monster01");
+        Monster monster01 = (Monster) ioc.getBean("monster01");
         System.out.println(monster01 + "运行内存=" + monster01.getClass());
         System.out.println("获取对应属性:" + monster01.getMonsterId() + monster01.getName() + monster01.getSkill());
 
@@ -65,7 +65,7 @@ public class SpringBeanTest {
     @Test
     public void setBeanByConstructor() {
         ApplicationContext ioc = new ClassPathXmlApplicationContext("beans.xml");
-        Monster bean = ioc.getBean("monster02",Monster.class);
+        Monster bean = ioc.getBean("monster02", Monster.class);
         System.out.println("bean+" + bean);  //bean+Monster{monsterId=200, name='白骨精', skill='吸血'}
     }
 
@@ -105,7 +105,7 @@ public class SpringBeanTest {
         System.out.println("deptBean=" + dept);
         Emp emp = ioc.getBean("emp", Emp.class);
         System.out.println("empBean=" + emp);
-        System.out.println("emp'department=" +emp.getDept().getName());
+        System.out.println("emp'department=" + emp.getDept().getName());
     }
 
     //通过静态工厂获取bean
@@ -133,6 +133,7 @@ public class SpringBeanTest {
         Monster myMonster03 = ioc.getBean("my_monster03", Monster.class);
         System.out.println(myMonster03);
     }
+
     //继承bean
     @Test
     public void setBeanByExtends() {
@@ -198,4 +199,14 @@ public class SpringBeanTest {
         System.out.println(orderServlet.getOrderService().getOrderDao()); //com.java.spring.dao.OrderDao@1fa268de
     }
 
+
+    //测试SpElBean
+    @Test
+    public void setBeanByEl() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans03.xml");
+        SpElBean elBean = ioc.getBean("elBean", SpElBean.class);
+        System.out.println(elBean.getBookName());
+
+
+    }
 }
