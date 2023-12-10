@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
+
+<!--    配置容器要扫描的包
+        1.component-scan 表示要对指定的包下的类进行扫描,扫描的目的是创建对应的对象到对应的容器中
+        2.base-package 指定要扫描的包是哪一个
+        3.整个含义是表示当Sring容器初始化时,就会扫描指定包下面的所有的有注解的 @Component @Repository @Service @Controller,将其实例化,生成对象
+        放到IOC容器中
+        4.resource-pattern="User*.class" 表示只扫描component包下面和它的子包下的User开头的类
+-->
+<!--    <context:component-scan base-package="com.java.spring.component"-->
+<!--                            resource-pattern="User*.class"-->
+<!--    />-->
+
+
+
+<!--
+    如果希望排除某个包/子包下的某中类型的注解,可以通过 exclude-filter来指定
+    1.type="annotation"
+    2.context:exclude-filter 指定要排除那种类型的注解
+    3.expression="org.springframework.stereotype.Service" 指定要排除的注解的全路径
+-->
+
+<!--    <context:component-scan base-package="com.java.spring.component">-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Service"/>-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
+<!--        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Repository"/>-->
+<!--    </context:component-scan>-->
+
+
+
+<!--    注意:use-default-filters="false"-->
+    <context:component-scan base-package="com.java.spring.component" use-default-filters="false">
+     <context:include-filter type="annotation" expression="org.springframework.stereotype.Service"/>
+     <context:include-filter type="annotation" expression="org.springframework.stereotype.Repository"/>
+     <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+                            
+ </beans>

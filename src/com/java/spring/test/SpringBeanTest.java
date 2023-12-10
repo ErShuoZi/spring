@@ -1,6 +1,11 @@
 package com.java.spring.test;
 
 import com.java.spring.bean.*;
+import com.java.spring.component.MyComponent;
+import com.java.spring.component.UserController;
+import com.java.spring.component.UserDao;
+import com.java.spring.component.UserService;
+import com.java.spring.component.t.Pig;
 import com.java.spring.service.MemberServiceImpl;
 import com.java.spring.web.OrderServlet;
 import org.junit.jupiter.api.Test;
@@ -206,7 +211,40 @@ public class SpringBeanTest {
         ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans03.xml");
         SpElBean elBean = ioc.getBean("elBean", SpElBean.class);
         System.out.println(elBean.getBookName());
+    }
+
+    //通过注解来配置bean
+    @Test
+    public void setBeanByAnnotation() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans04.xml");
+       
+        UserDao UserDao = ioc.getBean(UserDao.class);
+        UserService UserService = ioc.getBean(UserService.class);
+        UserController UserController = ioc.getBean(UserController.class);
+        MyComponent MyComponent = ioc.getBean(MyComponent.class);
+        System.out.println("UserDao=" + UserDao + "UserService=" + UserService + "UserController=" + UserController + "MyComponent=" + MyComponent );
+        Pig Pig = ioc.getBean(Pig.class);
+        System.out.println("Pig=" + Pig);  //Pig=com.java.spring.component.t.Pig@41c2284a 证明在扫描包的时候,子包也会被扫描
+
+    }
 
 
+
+    @Test
+    public void setBeanByExclude() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans04.xml");
+        //在默认情况下,注解标识的类创建对应对象后在容器中,id为类名的首字母小写
+        //也可以使用注解的value属性指定id值.并且value可以省略
+        UserDao UserDao = ioc.getBean("userDao", UserDao.class);
+        System.out.println("UserDao1=" + UserDao);
+    }
+
+    @Test
+    public void setBeanByCustomIdByAnnotation() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans04.xml");
+        //在默认情况下,注解标识的类创建对应对象后在容器中,id为类名的首字母小写
+        //也可以使用注解的value属性指定id值.并且value可以省略
+        UserDao UserDao = ioc.getBean("customUserDao", UserDao.class);
+        System.out.println("UserDao1=" + UserDao);
     }
 }
