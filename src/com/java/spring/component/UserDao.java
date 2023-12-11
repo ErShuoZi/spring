@@ -9,4 +9,6 @@ import org.springframework.stereotype.Repository;
  */
 @Repository("customUserDao")
 public class UserDao {
+    public UserDao() {
+    }
 }

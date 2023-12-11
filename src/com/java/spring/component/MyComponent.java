@@ -7,6 +7,8 @@ import org.springframework.stereotype.Component;
  * @version 1.0
  * 使用@Component标识该类是一个组件,是通用的注解
  */
-@Component
+@Component(value = "customComponent")
 public class MyComponent {
+    public MyComponent() {
+    }
 }

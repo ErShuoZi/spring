@@ -7,6 +7,8 @@ import org.springframework.stereotype.Controller;
  * @version 1.0
  * 使用@Controller表示该类是一个Controller类/对象
  */
-@Controller
+@Controller(value="customController")
 public class UserController {
+    public UserController() {
+    }
 }
