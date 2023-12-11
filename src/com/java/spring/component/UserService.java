@@ -11,4 +11,8 @@ import org.springframework.stereotype.Service;
 public class UserService {
     public UserService() {
     }
+
+    public void hi() {
+        System.out.println("UserService say Hi~");
+    }
 }

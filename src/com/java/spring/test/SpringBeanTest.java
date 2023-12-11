@@ -247,4 +247,16 @@ public class SpringBeanTest {
         UserDao UserDao = ioc.getBean("customUserDao", UserDao.class);
         System.out.println("UserDao1=" + UserDao);
     }
+
+
+
+    @Test
+    public void setPropertyByAutowired() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans05.xml");
+        UserController  userController =(UserController) ioc.getBean("userController");
+        UserService userService = (UserService)ioc.getBean("userService200", UserService.class);
+        userController.sayOk();
+        System.out.println("容器中的ioc UserService = " + userService);
+
+    }
 }
