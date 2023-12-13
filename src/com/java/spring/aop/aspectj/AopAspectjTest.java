@@ -48,4 +48,16 @@ public class AopAspectjTest {
 
 
     }
+
+    @Test
+    public void Test2() {
+        ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans06.xml");
+        Car car = ioc.getBean(Car.class);
+        car.run();
+        //这个car对象仍然是个代理对象
+        System.out.println("car的运行类型=" + car.getClass());
+        //切面类的ok1-执行的目标方法-run
+        //小汽车在running
+        //Spring aspectj-方法最终执行-日志-方法名-run-参数 []
+    }
 }

@@ -25,14 +25,37 @@ public class SmartAnimalAspect {
      * 3.showBeginLog方法可以理解成切入方法
      * 4.JoinPoint joinPoint:在底层执行时.Aspectj切面编程框架会给该切入方法传入连接点(JoinPoint)对象
      * @param joinPoint
+     * 如果切入表达式里的类跟切面类在同一个包下面,可以省略包名,只写简单类名
+     * 切入表达式也可以指向接口的方法,这时候切入表达式会对实现了接口的类/对象生效
      */
-    @Before(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.*(float, float))")
+    @Before(value = "execution(public float SmartDog.*(float, float))")
     public void showBeginLog(JoinPoint joinPoint) {
         //横切关注点-前置通知
         Signature signature = joinPoint.getSignature();
         Object[] args = joinPoint.getArgs();
         System.out.println("Spring aspectj-方法正常执行前-日志-方法名-" +signature.getName() +"-参数 "+ Arrays.asList(args));
     }
+    //给Car配置前置通知
+    @Before(value = "execution(public void Car.run())")
+    public void ok1(JoinPoint joinPoint) {
+        Signature signature = joinPoint.getSignature();
+        System.out.println("切面类的ok1-执行的目标方法-" + signature.getName());
+        //JoinPoint 常用方法
+        //
+        /**
+         *                 joinPoint.getSignature(),getName 获取目标方法名
+         *                 joinPoint.getSignature().getDeclaringType().getSimpleName() 获取目标方法所属类的简单类名
+         *                 joinPoint.getSignature().getDeclaringType(); 获取目标方法所属类的类名
+         *                 joinPoint.getArgs(); 获取传入目标方式的参数.返回数组
+         *                 joinPoint.getTarget();获取被代理的对象
+         *                 joinPoint.getThis();获取代理对象自己
+         *                 joinPoint.getSignature().getModifiers(); 获取目标方法的修饰符
+         *
+         */
+
+    }
+
+
 
     //返回通知
     @AfterReturning(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSum(float, float))")
@@ -53,7 +76,7 @@ public class SmartAnimalAspect {
     }
 
     //最终通知 After (不管是否发生异常都要执行)
-    @After(value = "execution(* *.*(..))")
+    @After(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSub(float , float ))")
     public void showFinallyEndLog(JoinPoint joinPoint) {
         //横切关注点-前置通知
         Signature signature = joinPoint.getSignature();
