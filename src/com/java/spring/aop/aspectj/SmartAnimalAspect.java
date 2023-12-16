@@ -58,21 +58,22 @@ public class SmartAnimalAspect {
 
 
     //返回通知
-    @AfterReturning(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSum(float, float))")
-    public void showSuccessEndLog(JoinPoint joinPoint) {
+    //如果希望把目标方法执行的结果返回给切入方法,可以在@AfterReturning注解中加入returning属性,属性对应的值要一致
+    @AfterReturning(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSum(float, float))",returning = "res")
+    public void showSuccessEndLog(JoinPoint joinPoint,Object res) {
         //横切关注点-前置通知
         Signature signature = joinPoint.getSignature();
         Object[] args = joinPoint.getArgs();
-        System.out.println("Spring aspectj-方法正常执行后-日志-方法名-" +signature.getName() +"-参数 "+ Arrays.asList(args));
+        System.out.println("Spring aspectj-方法正常执行后-日志-方法名-" +signature.getName() +"-参数 " + Arrays.asList(args)+ "-返回的结果" + res);
     }
 
     //异常通知 AfterThrowing
-    @AfterThrowing(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSum(float, float))")
-    public void showExceptionLog(JoinPoint joinPoint) {
+    @AfterThrowing(value = "execution(public float com.java.spring.aop.aspectj.SmartDog.getSum(float, float))",throwing = "throwable")
+    public void showExceptionLog(JoinPoint joinPoint,Throwable throwable) {
         //横切关注点-前置通知
         Signature signature = joinPoint.getSignature();
         Object[] args = joinPoint.getArgs();
-        System.out.println("Spring aspectj-方法异常执行-日志-方法名-" +signature.getName() +"-参数 "+ Arrays.asList(args));
+        System.out.println("Spring aspectj-方法异常执行-日志-方法名-" +signature.getName() +"-参数 "+ Arrays.asList(args) + "错误信息=" + throwable);
     }
 
     //最终通知 After (不管是否发生异常都要执行)

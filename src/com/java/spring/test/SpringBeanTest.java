@@ -168,9 +168,9 @@ public class SpringBeanTest {
     public void setBeanByPostProcessor() {
         ClassPathXmlApplicationContext ioc = new ClassPathXmlApplicationContext("beans02.xml");
         House house = ioc.getBean("house", House.class);
-        House house02 = ioc.getBean("house02", House.class);
-        System.out.println(house);
-        System.out.println(house02);
+//        House house02 = ioc.getBean("house02", House.class);
+//        System.out.println(house);
+//        System.out.println(house02);
         ioc.close();
 
         /**

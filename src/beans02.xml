@@ -8,9 +8,9 @@
         <property name="name" value="大豪宅" />
     </bean>
 
-    <bean id="house02" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">
-        <property name="name" value="香港豪宅" />
-    </bean>
+<!--    <bean id="house02" class="com.java.spring.bean.House" init-method="init" destroy-method="destory">-->
+<!--        <property name="name" value="香港豪宅" />-->
+<!--    </bean>-->
 
 <!--    配置后置处理器-->
 <!--当在beans02.xml容器配置文件中配置了后置处理器后,这时该后置处理器会对在该容器文件中的所有对象生效-->
